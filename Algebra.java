@@ -29,9 +29,17 @@ public class Algebra {
 	public static int plus(int x1, int x2) {
 		// Replace the following statement with your code
 		int sum = x1;
-		for(int i=0; i<x2; i++){
-			sum++;
+		if (x2>0){
+		    for(int i=0; i<x2; i++){
+		    	sum++;
+	    	}
+	    }
+		else{
+			for(int i=x2; i>0; i--){
+		    	sum--;
+	    	}	
 		}
+
 		return sum;
 	}
 
@@ -39,8 +47,15 @@ public class Algebra {
 	public static int minus(int x1, int x2) {
 		// Replace the following statement with your code
 		int sum = x1;
-		for(int i=0; i<x2; i++){
-			sum--;
+		if (x2>0){
+			for(int i=0; i<x2; i++){
+				sum--;
+			}
+		}
+		else{
+			for(int i=x2; i<0; i--){
+				sum++;
+			}
 		}
 		return sum;
 	}
@@ -49,8 +64,28 @@ public class Algebra {
 	public static int times(int x1, int x2) {
 		// Replace the following statement with your code
 		int sum=0;
-		for(int i=0; i<x2; i++){
-			sum = plus(sum, x1);
+		if (x1 <0 && x2 > 0){
+			x1 = minus(0, x1);
+			for(int i=0; i<x2; i++){
+			    sum = plus(sum, x1);
+		    }
+			sum = minus(0, sum);
+		}
+		if (x1 >0 && x2 < 0){
+			x2 = minus(0, x2);
+			for(int i=0; i<x2; i++){
+			    sum = plus(sum, x1);
+		    }
+			sum = minus(0, sum);
+		}
+		if(x1 < 0 && x2 < 0){
+			x1 = minus(0, x1);
+			x2 = minus(0, x2);
+		}
+		else{
+		    for(int i=0; i<x2; i++){
+			    sum = plus(sum, x1);
+		    }
 		}
 		return sum;
 	}
@@ -71,9 +106,33 @@ public class Algebra {
 		// Replace the following statement with your code
 		int count = 1;
 		int sum = x2;
-		while (x1 > sum) {
-			count++;
-			sum = times(x2, count);
+		if (x1 <0 && x2 > 0){
+			x1 = minus(0, x1);
+			while (x1 > sum) {
+				count++;
+				sum = times(x2, count);
+			}
+			if(x1 != sum) count--;
+			sum = minus(0, sum);
+		}
+		if (x1 >0 && x2 < 0){
+			x2 = minus(0, x2);
+			while (x1 > sum) {
+				count++;
+				sum = times(x2, count);
+			}
+			if(x1 != sum) count--;
+			sum = minus(0, sum);
+		}
+		if (x1<0 && x2<0) {
+			x1 = minus(0, x1);
+			x2 = minus(0, x2);
+		}
+		else{
+		    while (x1 > sum) {
+			    count++;
+			    sum = times(x2, count);
+		    }
 		}
 		if(x1 != sum) count--;
 		return count;
@@ -90,6 +149,7 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		// Replace the following statement with your code
+		if (x==1) return 1;
 		double epsilon = 0.01;
 		int g =x;
 		g = div(g,2);
