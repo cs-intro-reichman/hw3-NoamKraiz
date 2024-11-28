@@ -222,11 +222,12 @@ public class TestAlgebra {
         totalTests += 1;
         
         try {
+
             String algebraCode = new String(Files.readAllBytes(Paths.get("Algebra.java")));
             algebraCode = algebraCode.replaceAll("\".*\"", "")
-                                   .replaceAll("/\\*.*?\\*/", "")
-                                   .replaceAll("//.*", "");
-            
+                    .replaceAll("/\\*.*?\\*/", "")
+                    .replaceAll("//.*", "");
+
             String[] forbidden = {
                 "\\+[^+]", "-[^-]", "\\*", "/", "%", "Math\\.pow", "Math\\.sqrt"
             };
@@ -247,4 +248,4 @@ public class TestAlgebra {
             return 0;
         }
     }
-} 
+}
